@@ -1,0 +1,31 @@
+root
+{
+    display: block;
+}
+
+.root
+{
+
+}
+
+.button
+{
+    -fx-margin: 10;
+    -fx-background-radius: 3,2,1;
+}
+
+.recipe
+{
+    -fx-padding:5;
+    -fx-background-color:#ffffff;
+}
+
+.menuBox
+{
+    -fx-background-color:#ccc;
+}
+
+.dishRemove
+{
+    -fx-border-radius:20;
+}

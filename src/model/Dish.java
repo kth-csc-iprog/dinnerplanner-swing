@@ -1,4 +1,4 @@
-package se.kth.csc.iprog.dinnerplanner.model;
+package model;
 
 import java.util.HashSet;
 import java.util.Set;

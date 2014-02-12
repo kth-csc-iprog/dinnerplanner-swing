@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" styleClass="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ingredientsController">
+
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+
+    <top>
+
+    </top>
+
+    <center>
+
+    </center>
+
+    <right>
+
+    </right>
+
+    <bottom>
+
+    </bottom>
+
+</BorderPane>
