@@ -6,14 +6,32 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" styleClass="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.dishController">
+<BorderPane maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" styleClass="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 
     <stylesheets>
         <URL value="@style.css" />
     </stylesheets>
 
     <top>
+        <VBox minHeight="200.0" prefHeight="447.0" prefWidth="231.0" BorderPane.alignment="CENTER">
+            <children>
 
+                <HBox prefHeight="55.0" prefWidth="191.0" VBox.vgrow="NEVER">
+                    <children>
+                        <Label text="Total Cost:">
+                            <HBox.margin>
+                                <Insets top="13.0" />
+                            </HBox.margin>
+                        </Label>
+                        <Label fx:id="totalPrice" prefHeight="17.0" prefWidth="50.0">
+                            <HBox.margin>
+                                <Insets left="9.0" top="13.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
     </top>
 
     <center>

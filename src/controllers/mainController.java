@@ -14,7 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -109,15 +109,19 @@ public class mainController implements Initializable
         ingredientsButton.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
             @Override
             public void handle(javafx.event.ActionEvent actionEvent) {
-
                 Parent root;
                 try {
+                    ingredientsController IngredientsController = new ingredientsController(dinnerModel);
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("views/IngredientsView.fxml"));
+
                     root = FXMLLoader.load(getClass().getClassLoader().getResource("views/IngredientsView.fxml"));
+                    fxmlLoader.setRoot(root);
+                    fxmlLoader.setController(IngredientsController);
+
                     Stage stage = new Stage();
                     stage.setTitle("Ingredients");
                     stage.setScene(new Scene(root, 600, 400));
                     stage.show();
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -131,12 +135,17 @@ public class mainController implements Initializable
 
                 Parent root;
                 try {
+                    preparationController PreparationController = new preparationController(dinnerModel);
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("views/PreparationView.fxml"));
+
                     root = FXMLLoader.load(getClass().getClassLoader().getResource("views/PreparationView.fxml"));
+                    fxmlLoader.setRoot(root);
+                    fxmlLoader.setController(PreparationController);
+
                     Stage stage = new Stage();
                     stage.setTitle("Preparation");
                     stage.setScene(new Scene(root, 600, 400));
                     stage.show();
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -203,7 +212,7 @@ public class mainController implements Initializable
             type = 3;
         }
 
-        for(Dish d : dinnerModel.filterDishesOfType(type, s2))
+        for(final Dish d : dinnerModel.filterDishesOfType(type, s2))
         {
             Image dishImage;
             final Text dishLabel;
@@ -232,12 +241,17 @@ public class mainController implements Initializable
 
                     Parent root;
                     try {
+                        dishController DishController = new dishController(d);
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("views/DishView.fxml"));
+
                         root = FXMLLoader.load(getClass().getClassLoader().getResource("views/DishView.fxml"));
+                        fxmlLoader.setRoot(root);
+                        fxmlLoader.setController(DishController);
+
                         Stage stage = new Stage();
                         stage.setTitle(dishLabel.getText());
                         stage.setScene(new Scene(root, 600, 400));
                         stage.show();
-
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
