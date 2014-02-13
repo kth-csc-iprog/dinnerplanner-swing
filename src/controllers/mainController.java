@@ -4,7 +4,10 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -16,10 +19,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 import model.DinnerModel;
 import model.Dish;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -40,6 +45,9 @@ public class mainController implements Initializable
     @FXML public Button starterButton = new Button();
     @FXML public Button mainButton = new Button();
     @FXML public Button dessertButton = new Button();
+
+    @FXML public Button ingredientsButton = new Button();
+    @FXML public Button preparationButton = new Button();
 
     @FXML public TextField searchField = new TextField();
 
@@ -97,6 +105,46 @@ public class mainController implements Initializable
                 updateStringSearch(currentType, searchField.getText());
             }
         });
+
+        ingredientsButton.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
+            @Override
+            public void handle(javafx.event.ActionEvent actionEvent) {
+
+                Parent root;
+                try {
+                    root = FXMLLoader.load(getClass().getClassLoader().getResource("views/IngredientsView.fxml"));
+                    Stage stage = new Stage();
+                    stage.setTitle("Ingredients");
+                    stage.setScene(new Scene(root, 600, 400));
+                    stage.show();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+        preparationButton.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
+            @Override
+            public void handle(javafx.event.ActionEvent actionEvent) {
+
+                Parent root;
+                try {
+                    root = FXMLLoader.load(getClass().getClassLoader().getResource("views/PreparationView.fxml"));
+                    Stage stage = new Stage();
+                    stage.setTitle("Preparation");
+                    stage.setScene(new Scene(root, 600, 400));
+                    stage.show();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+
     }
 
     public void updateMenu()
@@ -176,10 +224,23 @@ public class mainController implements Initializable
             dishBox.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
+
                     //System.out.println(mouseEvent.getSource().toString());
-                    dinnerModel.addDish(dishLabel.getText());
+                    /*dinnerModel.addDish(dishLabel.getText());
                     updateMenu();
-                    updatePrice();
+                    updatePrice();*/
+
+                    Parent root;
+                    try {
+                        root = FXMLLoader.load(getClass().getClassLoader().getResource("views/DishView.fxml"));
+                        Stage stage = new Stage();
+                        stage.setTitle(dishLabel.getText());
+                        stage.setScene(new Scene(root, 600, 400));
+                        stage.show();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
             recipeBox.getChildren().add(dishBox);

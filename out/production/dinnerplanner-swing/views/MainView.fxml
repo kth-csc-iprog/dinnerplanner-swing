@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -8,6 +7,11 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane maxWidth="800.0" minHeight="500.0" minWidth="800.0" prefHeight="500.0" prefWidth="800.0" styleClass="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.mainController">
+
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+
     <top>
         <VBox prefHeight="78.0" prefWidth="560.0" BorderPane.alignment="CENTER">
             <children>
@@ -48,58 +52,89 @@
 
     <center>
         <HBox fx:id="recipeBox">
-        <BorderPane.margin>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-        </BorderPane.margin></HBox>
+            <BorderPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </BorderPane.margin>
+        </HBox>
     </center>
-    <stylesheets>
-        <URL value="@style.css" />
-    </stylesheets>
+
+
 
     <right>
         <VBox minHeight="200.0" prefHeight="447.0" prefWidth="231.0" BorderPane.alignment="CENTER">
-        <children><HBox prefHeight="28.0" prefWidth="191.0">
-        <children><Label text="Number of People:">
-        <HBox.margin>
-        <Insets top="5.0" />
-        </HBox.margin></Label><ChoiceBox fx:id="noPeople" prefWidth="50.0" xmlns:fx="http://javafx.com/fxml">
-        <HBox.margin>
-        <Insets left="40.0" />
-        </HBox.margin></ChoiceBox>
-        </children></HBox><HBox prefHeight="55.0" prefWidth="191.0" VBox.vgrow="NEVER">
-        <children><Label text="Total Cost:">
-        <HBox.margin>
-        <Insets top="13.0" />
-        </HBox.margin></Label>
-            <Label fx:id="totalPrice" prefHeight="17.0" prefWidth="50.0">
-                <HBox.margin>
-                    <Insets left="9.0" top="13.0" />
-                </HBox.margin>
-            </Label>
-        </children></HBox><Label text="Dinner Menu">
-        <font>
-        <Font name="Georgia Italic" size="27.0" />
-        </font></Label><ScrollPane prefHeight="244.0" prefWidth="191.0">
-<content><VBox fx:id="dinnerMenuBox" prefHeight="226.0" prefWidth="189.0" />
-</content>
-<VBox.margin>
-<Insets top="10.0" />
-</VBox.margin></ScrollPane><HBox alignment="BOTTOM_LEFT" prefWidth="200.0">
-        <children><Button mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="Preparation" /><Button mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Ingredients">
-        <HBox.margin>
-        <Insets left="11.0" />
-        </HBox.margin></Button>
-        </children>
-        <VBox.margin>
-        <Insets bottom="10.0" top="10.0" />
-        </VBox.margin></HBox>
-        </children>
-    <BorderPane.margin>
-    <Insets />
-    </BorderPane.margin>
-<padding>
-<Insets left="20.0" right="20.0" />
-</padding></VBox>
+            <children>
+
+                <HBox prefHeight="28.0" prefWidth="191.0">
+                    <children>
+                        <Label text="Number of People:">
+                            <HBox.margin>
+                                 <Insets top="5.0" />
+                            </HBox.margin>
+                        </Label>
+                        <ChoiceBox fx:id="noPeople" prefWidth="50.0" xmlns:fx="http://javafx.com/fxml">
+                            <HBox.margin>
+                                <Insets left="40.0" />
+                            </HBox.margin>
+                        </ChoiceBox>
+                    </children>
+                </HBox>
+
+                <HBox prefHeight="55.0" prefWidth="191.0" VBox.vgrow="NEVER">
+                    <children>
+                        <Label text="Total Cost:">
+                            <HBox.margin>
+                                <Insets top="13.0" />
+                            </HBox.margin>
+                        </Label>
+                        <Label fx:id="totalPrice" prefHeight="17.0" prefWidth="50.0">
+                            <HBox.margin>
+                                <Insets left="9.0" top="13.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                </HBox>
+
+                <Label text="Dinner Menu">
+                    <font>
+                        <Font name="Georgia Italic" size="27.0" />
+                    </font>
+                </Label>
+
+                <ScrollPane prefHeight="244.0" prefWidth="191.0">
+                    <content>
+                        <VBox fx:id="dinnerMenuBox" prefHeight="226.0" prefWidth="189.0" />
+                    </content>
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </ScrollPane>
+
+                <HBox alignment="BOTTOM_LEFT" prefWidth="200.0">
+                    <children>
+                        <Button mnemonicParsing="false" prefHeight="25.0" fx:id="preparationButton" prefWidth="91.0" text="Preparation" />
+                        <Button mnemonicParsing="false" prefHeight="25.0" fx:id="ingredientsButton" prefWidth="89.0" text="Ingredients">
+                            <HBox.margin>
+                                <Insets left="11.0" />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                    </VBox.margin>
+                </HBox>
+
+            </children>
+
+        <BorderPane.margin>
+            <Insets />
+        </BorderPane.margin>
+
+        <padding>
+            <Insets left="20.0" right="20.0" />
+        </padding>
+
+        </VBox>
+
     </right>
 
 </BorderPane>

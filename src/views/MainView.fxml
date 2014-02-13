@@ -111,8 +111,8 @@
 
                 <HBox alignment="BOTTOM_LEFT" prefWidth="200.0">
                     <children>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="Preparation" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Ingredients">
+                        <Button mnemonicParsing="false" prefHeight="25.0" fx:id="preparationButton" prefWidth="91.0" text="Preparation" />
+                        <Button mnemonicParsing="false" prefHeight="25.0" fx:id="ingredientsButton" prefWidth="89.0" text="Ingredients">
                             <HBox.margin>
                                 <Insets left="11.0" />
                             </HBox.margin>
