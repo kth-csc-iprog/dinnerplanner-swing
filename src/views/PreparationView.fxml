@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -15,14 +16,24 @@
     <right>
 
     </right>
-    <top>
-        <TextField prefHeight="80.0" prefWidth="468.0" text="Dinner menu preparation" BorderPane.alignment="CENTER">
-            <font>
-                <Font size="38.0" />
-            </font>
-        </TextField>
-    </top>
-    <center><VBox fx:id="preparationMenuBox" alignment="CENTER" prefWidth="0.0" BorderPane.alignment="CENTER" />
+
+    <center>
+        <VBox fx:id="preparationMenuBox" alignment="CENTER" prefWidth="0.0" BorderPane.alignment="CENTER" />
     </center>
+
+    <top>
+        <VBox prefHeight="62.0" prefWidth="468.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label prefHeight="17.0" prefWidth="470.0" text="Dinner menu preparation" textAlignment="CENTER">
+                    <font>
+                        <Font name="Georgia Italic" size="36.0" />
+                    </font>
+                <VBox.margin>
+                    <Insets left="20.0" top="10.0" />
+                </VBox.margin>
+                </Label>
+            </children>
+        </VBox>
+    </top>
 
 </BorderPane>
