@@ -248,7 +248,7 @@ public class mainController implements Initializable
                     Parent root = new BorderPane();
                     try
                     {
-                        dishController DishController = new dishController(d);
+                        dishController DishController = new dishController(d, dinnerModel);
                         fxmlLoader.setRoot(root);
                         fxmlLoader.setController(DishController);
                         fxmlLoader.load();
