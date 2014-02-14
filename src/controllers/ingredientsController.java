@@ -1,6 +1,7 @@
 package controllers;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import model.DinnerModel;
+import model.Ingredient;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -61,12 +63,14 @@ public class ingredientsController
 
         data = FXCollections.observableArrayList();
         itemTbl.setItems(data);
+
+        fillTable();
     }
 
     public class Item
     {
         public SimpleStringProperty ingredient = new SimpleStringProperty();
-        public SimpleIntegerProperty quantity = new SimpleIntegerProperty();
+        public SimpleStringProperty quantity = new SimpleStringProperty();
         public SimpleStringProperty cost = new SimpleStringProperty();
 
         public String getIngredient() {
@@ -77,9 +81,26 @@ public class ingredientsController
             return cost.get();
         }
 
-        public Integer getQuantity() {
+        public String getQuantity() {
             return quantity.get();
         }
+    }
+
+    @FXML
+    private void fillTable()
+    {
+        for(Ingredient i: dM.getAllIngredients())
+        {
+            Item item = new Item();
+            item.ingredient.setValue(i.getName());
+            Float quantity = new Float(i.getQuantity());
+            quantity = quantity * dM.getNumberOfGuests();
+            item.quantity.setValue(String.valueOf(quantity)+" "+i.getUnit());
+            Float cost = new Float(i.getPrice()*dM.getNumberOfGuests());
+            item.cost.setValue("SEK "+cost.toString());
+            data.add(item);
+        }
+
     }
 
 }
