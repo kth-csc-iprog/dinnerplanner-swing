@@ -14,7 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -68,6 +68,7 @@ public class mainController implements Initializable
         // handlers
 
         noPeople.getItems().addAll("1", "2", "3", "4", "5", "6");
+        noPeople.setValue("1");
         noPeople.getSelectionModel().selectedItemProperty().addListener(new javafx.beans.value.ChangeListener<String>() {
             @Override
             public void changed(ObservableValue observableValue, String o, String o2)
@@ -158,6 +159,41 @@ public class mainController implements Initializable
             }
         });
 
+        dinnerMenuBox.setOnDragOver(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent dragEvent) {
+
+                if (dragEvent.getGestureSource() != dinnerMenuBox &&
+                        dragEvent.getDragboard().hasString()) {
+            /* allow for both copying and moving, whatever user chooses */
+                    dragEvent.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                }
+
+                dragEvent.consume();
+            }
+        });
+
+        dinnerMenuBox.setOnDragDropped(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent dragEvent)
+            {
+                Dragboard db = dragEvent.getDragboard();
+                boolean success = false;
+                if (db.hasString())
+                {
+                    String s = db.getString();
+                    dinnerModel.addDish(s);
+                    success = true;
+                }
+
+                /* let the source know whether the string was successfully
+                 * transferred and used */
+                dragEvent.setDropCompleted(success);
+                updateMenu();
+                updatePrice();
+                dragEvent.consume();
+            }
+        });
 
     }
 
@@ -219,7 +255,7 @@ public class mainController implements Initializable
 
         for(final Dish d : dinnerModel.filterDishesOfType(type, s2))
         {
-            Image dishImage;
+            final Image dishImage;
             final Text dishLabel;
             ImageView dishImageView;
 
@@ -239,11 +275,6 @@ public class mainController implements Initializable
                 @Override
                 public void handle(MouseEvent mouseEvent) {
 
-                    //System.out.println(mouseEvent.getSource().toString());
-                    /*dinnerModel.addDish(dishLabel.getText());
-                    updateMenu();
-                    updatePrice();*/
-
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("views/DishView.fxml"));
                     Parent root = new BorderPane();
                     try
@@ -261,6 +292,25 @@ public class mainController implements Initializable
                     {
                         e.printStackTrace();
                     }
+                }
+            });
+
+            // Mouse drag
+
+            dishBox.setOnDragDetected(new EventHandler<MouseEvent>()
+            {
+                @Override
+                public void handle(MouseEvent mouseEvent)
+                {
+                    /* drag was detected, start a drag-and-drop gesture*/
+                     /* allow any transfer mode */
+                    Dragboard db = recipeBox.startDragAndDrop(TransferMode.ANY);
+
+                    /* Put a string on a dragboard */
+                    ClipboardContent content = new ClipboardContent();
+                    content.putString(dishLabel.getText());
+                    db.setContent(content);
+                    mouseEvent.consume();
                 }
             });
             recipeBox.getChildren().add(dishBox);
