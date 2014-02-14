@@ -1,8 +1,16 @@
 package controllers;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import model.DinnerModel;
 
@@ -14,8 +22,23 @@ import java.util.ResourceBundle;
  */
 public class ingredientsController
 {
+    // The table and columns
+    @FXML
+    TableView<Item> itemTbl;
+
+    @FXML
+    TableColumn itemIngredient;
+    @FXML
+    TableColumn itemQuantity;
+    @FXML
+    TableColumn itemCost;
+
+    // The table's data
+    ObservableList<Item> data;
+
+    static long nextId = 1;
+
     // use @FXML declaration here to bind objects to the fxml, check the other documents.
-    @FXML VBox exampleBox;
     DinnerModel dM;
     public ingredientsController(DinnerModel dinnerModel)
     {
@@ -25,13 +48,38 @@ public class ingredientsController
 
     @FXML void initialize()
     {
-        // Here you should loop through the ingredients in the menu and echo them.
-        // It can be done like the updateMenu function in the main controller using:
-        //
-        // for(Ingredient i : dinnerModel.getAllIngredients()) { code }
-        //
-        // the i then is one dish object which has all the properties
-        exampleBox.getChildren().add(new Label(dM.getAllIngredients().toString()));
+        // Set up the table data
+        itemIngredient.setCellValueFactory(
+                new PropertyValueFactory<Item,String>("Ingredient")
+        );
+        itemQuantity.setCellValueFactory(
+                new PropertyValueFactory<Item,Integer>("Quantity")
+        );
+        itemCost.setCellValueFactory(
+                new PropertyValueFactory<Item,String>("Cost")
+        );
+
+        data = FXCollections.observableArrayList();
+        itemTbl.setItems(data);
+    }
+
+    public class Item
+    {
+        public SimpleStringProperty ingredient = new SimpleStringProperty();
+        public SimpleIntegerProperty quantity = new SimpleIntegerProperty();
+        public SimpleStringProperty cost = new SimpleStringProperty();
+
+        public String getIngredient() {
+            return ingredient.get();
+        }
+
+        public String getCost() {
+            return cost.get();
+        }
+
+        public Integer getQuantity() {
+            return quantity.get();
+        }
     }
 
 }
