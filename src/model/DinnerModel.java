@@ -70,6 +70,17 @@ public class DinnerModel implements IDinnerModel
 
         dishes.add(dish3);
 
+        Dish dish4 = new Dish("Ice cream",Dish.DESERT,"icecream.jpg","Place the banana and mango in a sealed container and freeze for 2–3 hours or until frozen. Place the frozen fruit and yogurt in a blender or food processor and blend until smooth. Serve immediately or place in a sealed container and freeze. After freezing allow to soften for 5 minutes before serving.");
+        Ingredient dish4ing1 = new Ingredient("Peeled & chopped bananas",2,"",2);
+        Ingredient dish4ing2 = new Ingredient("Peeled & chopped mangos",3,"",8);
+        Ingredient dish4ing3 = new Ingredient("Thick or vanilla yogurt",280,"g",12);
+
+        dish4.addIngredient(dish4ing1);
+        dish4.addIngredient(dish4ing2);
+        dish4.addIngredient(dish4ing3);
+
+        dishes.add(dish4);
+
         nrGuests = 1;
     }
 
