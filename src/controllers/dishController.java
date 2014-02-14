@@ -10,43 +10,26 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by Henri on 12-2-14
- * Not sure what has changed and how things need to be changed? (Wouter)
+ * Created by Henri on 12-2-14 updated just now.
  */
-public class dishController implements Initializable {
-
-    private DinnerModel dinnerModel = new DinnerModel();
-    // The components of our views
-    // Components for the menu
-
-    @FXML public Label dishName = new Label();
-
-    private String currentDish = "macaroni";
 
 
+
+public class dishController
+{
+
+    private Dish d;
+    
     public dishController(Dish dish)
     {
-        System.out.println(dish.getName());
-
-        currentDish = (dish.getName());
-        //currentDish = currentDish.substring(0,currentDish.length()-2);
-
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-    dishName.setText("SEK 600"+ DinnerModel.dishLabel);
+        d = dish;
+        
     }
 
 
     @FXML void initialize()
     {
-
-    }
-
-    public void updatePrice()
-    {
-
+        System.out.println(d.getName());
     }
 
 }

@@ -13,6 +13,7 @@ public class preparationController {
 
     @FXML VBox preparationMenuBox;
     DinnerModel dM;
+
     public preparationController(DinnerModel dinnerModel)
     {
         dM = dinnerModel;
