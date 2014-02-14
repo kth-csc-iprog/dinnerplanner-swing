@@ -1,10 +1,19 @@
 package controllers;
 
+import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import model.DinnerModel;
 import model.Dish;
 import model.Ingredient;
@@ -19,11 +28,22 @@ public class dishController
 {
     @FXML public Label dishName;
     @FXML public Label dishPrice;
-    @FXML public Label dishDescription;
-    @FXML public VBox dishOverview = new VBox();
+    @FXML public Text dishDescription;
+    @FXML public VBox dishImageBox = new VBox();
+
+    // The table and columns
+    @FXML TableView<Items> itemTbl;
+    @FXML TableColumn dishIngredient;
+    @FXML TableColumn ingredientQuantity;
+    @FXML TableColumn ingredientCost;
 
     private DinnerModel dM;
     private Dish d;
+
+    // The table's data
+    ObservableList<Items> data;
+
+    static long nextId = 1;
     
     public dishController(Dish dish, DinnerModel dinnerModel)
     {
@@ -35,24 +55,44 @@ public class dishController
     @FXML void initialize()
     {
         System.out.println(d.getName());
-        dishName.setText(d.getName());
 
-        dishOverview.getChildren().clear();
+
+        dishImageBox.getChildren().clear();
 
             Image dishImage;
             ImageView dishImageView;
+
+            final Text dishLabel;
             VBox dishBox = new VBox();
 
             dishImage = new Image(new File("images/"+d.getImage()).toURI().toString());
+            //dishLabel = new Text(d.getName());
+           // dishLabel.setTextAlignment(TextAlignment.RIGHT);
             dishImageView = new ImageView(dishImage);
             dishBox.getChildren().add(dishImageView);
+            //dishBox.getChildren().add(dishLabel);
             dishBox.getStyleClass().add("recipe");
 
-         dishOverview.getChildren().add(dishBox);
+        dishImageBox.getChildren().add(dishBox);
 
-        dishPrice.setText(String.valueOf(getDishPrice()));
+        dishName.setText(d.getName());
+        dishPrice.setText("$ "+String.valueOf(getDishPrice())+" for "+(String.valueOf(dM.getNumberOfGuests()))+" Person(s)");
         dishDescription.setText(d.getDescription());
+        dishDescription.setWrappingWidth(200);
 
+        // Set up the table data
+        dishIngredient.setCellValueFactory(
+                new PropertyValueFactory<Items,String>("Ingredient")
+        );
+        ingredientQuantity.setCellValueFactory(
+                new PropertyValueFactory<Items,Integer>("Quantity")
+        );
+        ingredientCost.setCellValueFactory(
+                new PropertyValueFactory<Items,String>("Cost")
+        );
+
+        data = FXCollections.observableArrayList();
+        itemTbl.setItems(data);
     }
 
     public float getDishPrice()
@@ -66,6 +106,23 @@ public class dishController
         return (float) price;
     }
 
+    public class Items
+    {
+        public SimpleStringProperty ingredient = new SimpleStringProperty();
+        public SimpleIntegerProperty quantity = new SimpleIntegerProperty();
+        public SimpleFloatProperty cost = new SimpleFloatProperty();
 
+        public String getIngredient() {
+            return ingredient.get();
+        }
+
+        public Float getCost() {
+            return cost.get();
+        }
+
+        public Integer getQuantity() {
+            return quantity.get();
+        }
+    }
 
 }
