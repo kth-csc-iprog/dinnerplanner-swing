@@ -18,16 +18,16 @@
 
                     <HBox prefHeight="28.0" prefWidth="191.0">
                         <children>
-                            <Label text="Dish:">
+                            <Label fx:id="dishName">
                                 <HBox.margin>
                                     <Insets top="5.0" />
                                 </HBox.margin>
                             </Label>
-                            <ChoiceBox fx:id="noPeople" prefWidth="50.0" xmlns:fx="http://javafx.com/fxml">
+                            <Label fx:id="dishName" prefHeight="17.0" prefWidth="50.0">
                                 <HBox.margin>
-                                    <Insets left="40.0" />
+                                    <Insets left="9.0" top="13.0" />
                                 </HBox.margin>
-                            </ChoiceBox>
+                            </Label>
                         </children>
                     </HBox>
 
@@ -38,7 +38,7 @@
                                     <Insets top="13.0" />
                                 </HBox.margin>
                             </Label>
-                            <Label fx:id="totalPrice" prefHeight="17.0" prefWidth="50.0">
+                            <Label fx:id="dishName" prefHeight="17.0" prefWidth="50.0">
                                 <HBox.margin>
                                     <Insets left="9.0" top="13.0" />
                                 </HBox.margin>
