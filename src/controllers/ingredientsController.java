@@ -16,21 +16,22 @@ public class ingredientsController
 {
     // use @FXML declaration here to bind objects to the fxml, check the other documents.
     @FXML VBox exampleBox;
-
+    DinnerModel dM;
     public ingredientsController(DinnerModel dinnerModel)
     {
-        System.out.println(dinnerModel.getFullMenu());
+        dM = dinnerModel;
+        //System.out.println(dinnerModel.getFullMenu());
+    }
+
+    @FXML void initialize()
+    {
         // Here you should loop through the ingredients in the menu and echo them.
         // It can be done like the updateMenu function in the main controller using:
         //
         // for(Ingredient i : dinnerModel.getAllIngredients()) { code }
         //
         // the i then is one dish object which has all the properties
-    }
-
-    @FXML void initialize()
-    {
-        exampleBox.getChildren().add(new Label("something"));
+        exampleBox.getChildren().add(new Label(dM.getAllIngredients().toString()));
     }
 
 }

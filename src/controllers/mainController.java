@@ -62,6 +62,7 @@ public class mainController implements Initializable
         dinnerModel.addDish("Meat balls");
 
         updateMenu();
+        updatePrice();
         updateStringSearch(currentType, searchField.getText());
 
         // handlers
