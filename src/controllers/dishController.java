@@ -1,7 +1,5 @@
 package controllers;
 
-import javafx.beans.property.SimpleFloatProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -76,9 +74,9 @@ public class dishController
         dishImageBox.getChildren().add(dishBox);
 
         dishName.setText(d.getName());
-        dishPrice.setText("$ "+String.valueOf(getDishPrice())+" for "+(String.valueOf(dM.getNumberOfGuests()))+" Person(s)");
+        dishPrice.setText("SEK "+String.valueOf(getDishPrice())+" for "+(String.valueOf(dM.getNumberOfGuests()))+" Person(s)");
         dishDescription.setText(d.getDescription());
-        dishDescription.setWrappingWidth(200);
+        dishDescription.setWrappingWidth(316);
 
         // Set up the table data
         dishIngredient.setCellValueFactory(
@@ -93,6 +91,8 @@ public class dishController
 
         data = FXCollections.observableArrayList();
         itemTbl.setItems(data);
+
+        fillTable();
     }
 
     public float getDishPrice()
@@ -109,20 +109,36 @@ public class dishController
     public class Items
     {
         public SimpleStringProperty ingredient = new SimpleStringProperty();
-        public SimpleIntegerProperty quantity = new SimpleIntegerProperty();
-        public SimpleFloatProperty cost = new SimpleFloatProperty();
+        public SimpleStringProperty quantity = new SimpleStringProperty();
+        public SimpleStringProperty cost = new SimpleStringProperty();
 
         public String getIngredient() {
             return ingredient.get();
         }
 
-        public Float getCost() {
+        public String getCost() {
             return cost.get();
         }
 
-        public Integer getQuantity() {
+        public String getQuantity() {
             return quantity.get();
         }
+    }
+
+    @FXML private void fillTable()
+    {
+        for(Ingredient i: d.getIngredients())
+        {
+            Items item = new Items();
+            item.ingredient.setValue(i.getName());
+            Float quantity = new Float(i.getQuantity());
+            quantity = quantity * dM.getNumberOfGuests();
+            item.quantity.setValue(String.valueOf(quantity)+" "+i.getUnit());
+            Float cost = new Float(i.getPrice()*dM.getNumberOfGuests());
+            item.cost.setValue("SEK "+cost.toString());
+            data.add(item);
+        }
+
     }
 
 }
