@@ -35,6 +35,7 @@ public class preparationController {
 
             Label label = new Label();
             Text text = new Text();
+            
             text.maxWidth(400);
             text.setWrappingWidth(550);
 
