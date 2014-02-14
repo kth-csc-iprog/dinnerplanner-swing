@@ -139,7 +139,7 @@ public class DinnerModel implements IDinnerModel
     }
 
     @Override
-    public int getNumberOfGuests(int numberOfGuests) {
+    public int getNumberOfGuests() {
         return nrGuests;
     }
 

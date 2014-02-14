@@ -13,17 +13,15 @@
     </stylesheets>
 
     <top>
-            <VBox minHeight="200.0" prefHeight="447.0" prefWidth="231.0" BorderPane.alignment="CENTER">
+            <VBox minHeight="200.0" prefHeight="447.0" prefWidth="231.0" BorderPane.alignment="TOP_LEFT">
                 <children>
 
                     <HBox prefHeight="28.0" prefWidth="191.0">
                         <children>
-                            <Label fx:id="dishName">
-                                <HBox.margin>
-                                    <Insets top="5.0" />
-                                </HBox.margin>
-                            </Label>
-                            <Label fx:id="dishName" prefHeight="17.0" prefWidth="50.0">
+                            <Label fx:id="dishName" prefHeight="17.0" prefWidth="200">
+                                <font>
+                                    <Font name="Georgia Italic" size="27.0" />
+                                </font>
                                 <HBox.margin>
                                     <Insets left="9.0" top="13.0" />
                                 </HBox.margin>
@@ -31,60 +29,32 @@
                         </children>
                     </HBox>
 
-                    <HBox prefHeight="55.0" prefWidth="191.0" VBox.vgrow="NEVER">
+                    <HBox prefHeight="140.0" prefWidth="140.0">
                         <children>
-                            <Label text="Total Cost:">
-                                <HBox.margin>
-                                    <Insets top="13.0" />
-                                </HBox.margin>
-                            </Label>
-                            <Label fx:id="dishName" prefHeight="17.0" prefWidth="50.0">
-                                <HBox.margin>
-                                    <Insets left="9.0" top="13.0" />
-                                </HBox.margin>
-                            </Label>
+                            <VBox fx:id="dishOverview" prefHeight="226.0" prefWidth="189.0" />
                         </children>
-                    </HBox>
-
-                    <Label text="Dinner Menu">
-                        <font>
-                            <Font name="Georgia Italic" size="27.0" />
-                        </font>
-                    </Label>
-
-                    <ScrollPane prefHeight="244.0" prefWidth="191.0">
-                        <content>
-                            <VBox fx:id="dinnerMenuBox" prefHeight="226.0" prefWidth="189.0" />
-                        </content>
                         <VBox.margin>
                             <Insets top="10.0" />
                         </VBox.margin>
-                    </ScrollPane>
-
-                    <HBox alignment="BOTTOM_LEFT" prefWidth="200.0">
+                    </HBox>
+                    <HBox prefHeight="28.0" prefWidth="191.0">
                         <children>
-                            <Button mnemonicParsing="false" prefHeight="25.0" fx:id="preparationButton" prefWidth="91.0" text="Preparation" />
-                            <Button mnemonicParsing="false" prefHeight="25.0" fx:id="ingredientsButton" prefWidth="89.0" text="Ingredients">
+                            <Label fx:id="dishDescription" prefHeight="100.0" prefWidth="200">
+                                <font>
+                                    <Font name="Georgia" size="12.0" />
+
+                                </font>
                                 <HBox.margin>
-                                    <Insets left="11.0" />
+                                    <Insets left="9.0" top="13.0" />
                                 </HBox.margin>
-                            </Button>
+                            </Label>
+                            <Label fx:id="dishPrice" prefHeight="100.0" prefWidth="200">
+                            </Label>
                         </children>
-                        <VBox.margin>
-                            <Insets bottom="10.0" top="10.0" />
-                        </VBox.margin>
                     </HBox>
 
-                </children>
 
-                <BorderPane.margin>
-                    <Insets />
-                </BorderPane.margin>
-
-                <padding>
-                    <Insets left="20.0" right="20.0" />
-                </padding>
-
+                 </children>
             </VBox>
     </top>
 
