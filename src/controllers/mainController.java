@@ -27,12 +27,14 @@ import model.Dish;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 /**
  * Created by Henri on 7-2-14.
  */
-public class mainController implements Initializable
+public class mainController implements Initializable, Observer
 {
     private DinnerModel dinnerModel = new DinnerModel();
     // The components of our views
@@ -59,7 +61,8 @@ public class mainController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        dinnerModel.addDish("Meat balls");
+
+        dinnerModel.addObserver(this);
 
         updateMenu();
         updatePrice();
@@ -74,7 +77,6 @@ public class mainController implements Initializable
             public void changed(ObservableValue observableValue, String o, String o2)
             {
                 dinnerModel.setNumberOfGuests(Integer.parseInt(o2));
-                updatePrice();
             }
         });
 
@@ -189,8 +191,6 @@ public class mainController implements Initializable
                 /* let the source know whether the string was successfully
                  * transferred and used */
                 dragEvent.setDropCompleted(success);
-                updateMenu();
-                updatePrice();
                 dragEvent.consume();
             }
         });
@@ -223,10 +223,7 @@ public class mainController implements Initializable
             dishRemove.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    //System.out.println(mouseEvent.getSource().toString());
                     dinnerModel.removeDish(dishLabel.getText());
-                    updateMenu();
-                    updatePrice();
                 }
             });
 
@@ -305,7 +302,6 @@ public class mainController implements Initializable
                     /* drag was detected, start a drag-and-drop gesture*/
                      /* allow any transfer mode */
                     Dragboard db = recipeBox.startDragAndDrop(TransferMode.ANY);
-
                     /* Put a string on a dragboard */
                     ClipboardContent content = new ClipboardContent();
                     content.putString(dishLabel.getText());
@@ -325,5 +321,18 @@ public class mainController implements Initializable
         totalPrice.setText("SEK "+s);
     }
 
+    @Override
+    public void update(Observable o, Object arg)
+    {
+        if(arg == "dishes")
+        {
+            updateMenu();
+            updatePrice();
+        }
+        else if(arg == "guests")
+        {
+            updatePrice();
+        }
+    }
 }
 

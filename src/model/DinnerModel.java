@@ -1,9 +1,13 @@
 package model;
 
+import javafx.beans.InvalidationListener;
+
+import java.util.Observable;
+
 import java.util.HashSet;
 import java.util.Set;
 
-public class DinnerModel implements IDinnerModel
+public class DinnerModel extends Observable implements IDinnerModel
 {
     int nrGuests;
     Set<Dish> dishes = new HashSet<Dish>();
@@ -19,7 +23,6 @@ public class DinnerModel implements IDinnerModel
      * The constructor of the overall model. Set the default values here
      */
     public DinnerModel(){
-
         //Adding some example data, you can add more
         Dish dish1 = new Dish("French toast",Dish.STARTER,"toast.jpg","In a large mixing bowl, beat the eggs. Add the milk, brown sugar and nutmeg; stir well to combine. Soak bread slices in the egg mixture until saturated. Heat a lightly oiled griddle or frying pan over medium high heat. Brown slices on both sides, sprinkle with cinnamon and serve hot.");
         Ingredient dish1ing1 = new Ingredient("eggs",0.5,"",1);
@@ -131,6 +134,8 @@ public class DinnerModel implements IDinnerModel
                 if(!selecteddishes.contains(d))
                 {
                     selecteddishes.add(d);
+                    this.setChanged();
+                    this.notifyObservers("dishes");
                 }
             }
         }
@@ -144,6 +149,8 @@ public class DinnerModel implements IDinnerModel
                 if(selecteddishes.contains(d))
                 {
                     selecteddishes.remove(d);
+                    this.setChanged();
+                    this.notifyObservers("dishes");
                 }
             }
         }
@@ -157,6 +164,8 @@ public class DinnerModel implements IDinnerModel
     @Override
     public void setNumberOfGuests(int numberOfGuests) {
         nrGuests = numberOfGuests;
+        this.setChanged();
+        this.notifyObservers("guests");
     }
 
     @Override
@@ -195,4 +204,5 @@ public class DinnerModel implements IDinnerModel
         price = price * nrGuests;
         return (float) price;
     }
+
 }
