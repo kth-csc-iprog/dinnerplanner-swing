@@ -17,12 +17,14 @@ import model.DinnerModel;
 import model.Ingredient;
 
 import java.net.URL;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 /**
  * Created by Henri on 12-2-14.
  */
-public class ingredientsController
+public class ingredientsController implements Observer
 {
     // The table and columns
     @FXML
@@ -46,6 +48,7 @@ public class ingredientsController
     {
         dM = dinnerModel;
         //System.out.println(dinnerModel.getFullMenu());
+        dM.addObserver(this);
     }
 
     @FXML void initialize()
@@ -64,6 +67,12 @@ public class ingredientsController
         data = FXCollections.observableArrayList();
         itemTbl.setItems(data);
 
+        fillTable();
+    }
+
+    @Override
+    public void update(Observable o, Object arg)
+    {
         fillTable();
     }
 

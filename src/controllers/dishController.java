@@ -17,12 +17,14 @@ import model.Dish;
 import model.Ingredient;
 
 import java.io.File;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by Henri on 12-2-14 updated just now.
  */
 
-public class dishController
+public class dishController implements Observer
 {
     @FXML public Label dishName;
     @FXML public Label dishPrice;
@@ -47,14 +49,13 @@ public class dishController
     {
         d = dish;
         dM = dinnerModel;
+        dM.addObserver(this);
     }
 
 
     @FXML void initialize()
     {
-        System.out.println(d.getName());
-
-
+        //System.out.println(d.getName());
         dishImageBox.getChildren().clear();
 
             Image dishImage;
@@ -104,6 +105,11 @@ public class dishController
         }
         price = price * dM.getNumberOfGuests();
         return (float) price;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        initialize();
     }
 
     public class Items

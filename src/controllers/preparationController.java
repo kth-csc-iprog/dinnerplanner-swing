@@ -7,11 +7,14 @@ import javafx.scene.text.Text;
 import model.DinnerModel;
 import model.Dish;
 
+import java.util.Observable;
+import java.util.Observer;
+
 
 /**
  * Created by Henri on 12-2-14.
  */
-public class preparationController {
+public class preparationController implements Observer {
 
     @FXML VBox preparationMenuBox;
     DinnerModel dM;
@@ -19,6 +22,7 @@ public class preparationController {
     public preparationController(DinnerModel dinnerModel)
     {
         dM = dinnerModel;
+        dM.addObserver(this);
     }
 
     @FXML void initialize() {
@@ -61,4 +65,9 @@ public class preparationController {
     }
 
 
+    @Override
+    public void update(Observable o, Object arg)
+    {
+        initialize();
+    }
 }
