@@ -3,6 +3,7 @@ package controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import model.DinnerModel;
 import model.Dish;
@@ -26,14 +27,6 @@ public class preparationController implements Observer {
     }
 
     @FXML void initialize() {
-        // Here you should add both the label of the dish and the preparation instructions.
-        // It can be done like the updateMenu function in the main controller using:
-        //
-        // for(Dish d : dM.getFullMenu()) { code }
-        //
-        // the d then is one dish object which has all the properties
-
-
         for(Dish d : dM.getFullMenu())
         {
 
@@ -45,18 +38,24 @@ public class preparationController implements Observer {
 
             if(d.getType() == 1)
             {
-                label.setText("Starter");
+                label.setText("Starter - "+d.getName());
+                label.setFont(Font.font("Verdana", 20));
+               //System.out.println("Starter");
             }
             else if(d.getType()==2)
             {
-                label.setText("Main");
+                label.setText("Main - "+d.getName());
+                label.setFont(Font.font("Verdana", 20));
+                //System.out.println("Main");
             }
             else if(d.getType()==3)
             {
-                label.setText("Desert");
+                label.setText("Desert - "+d.getName());
+                label.setFont(Font.font("Verdana", 20));
+                //System.out.println("Desert");
             }
+            text.setText(d.getDescription()+"\n");
 
-            text.setText(d.getDescription());
             preparationMenuBox.getChildren().add(label);
             preparationMenuBox.getChildren().add(text);
 
