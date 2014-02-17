@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,6 +25,7 @@ import javafx.stage.Stage;
 import model.DinnerModel;
 import model.Dish;
 
+import javax.swing.border.Border;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -53,8 +55,10 @@ public class mainController implements Initializable, Observer
     @FXML public Button preparationButton = new Button();
 
     @FXML public TextField searchField = new TextField();
+    @FXML public BorderPane rootPane = new BorderPane();
 
     private String currentType = "starter";
+    private ImageView dragImageView = new ImageView();
 
     // Handlers
 
@@ -256,7 +260,7 @@ public class mainController implements Initializable, Observer
             final Text dishLabel;
             ImageView dishImageView;
 
-            VBox dishBox = new VBox();
+            final VBox dishBox = new VBox();
             dishImage = new Image(new File("images/"+d.getImage()).toURI().toString());
             dishLabel = new Text(d.getName());
             dishLabel.setWrappingWidth(140);
@@ -292,7 +296,15 @@ public class mainController implements Initializable, Observer
                 }
             });
 
+
             // Mouse drag
+
+            dishBox.setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    dragImageView.setMouseTransparent(true);
+                }
+            });
 
             dishBox.setOnDragDetected(new EventHandler<MouseEvent>()
             {
@@ -302,13 +314,16 @@ public class mainController implements Initializable, Observer
                     /* drag was detected, start a drag-and-drop gesture*/
                      /* allow any transfer mode */
                     Dragboard db = recipeBox.startDragAndDrop(TransferMode.ANY);
-                    /* Put a string on a dragboard */
                     ClipboardContent content = new ClipboardContent();
                     content.putString(dishLabel.getText());
                     db.setContent(content);
+                    /* Put a string on a dragboard */
+
+
                     mouseEvent.consume();
                 }
             });
+
             recipeBox.getChildren().add(dishBox);
         }
 
