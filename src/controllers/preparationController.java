@@ -27,39 +27,47 @@ public class preparationController implements Observer {
     }
 
     @FXML void initialize() {
-        for(Dish d : dM.getFullMenu())
+        preparationMenuBox.getChildren().clear();
+        if (dM.getFullMenu().isEmpty())
         {
-
             Label label = new Label();
-            Text text = new Text();
-            
-            text.maxWidth(400);
-            text.setWrappingWidth(550);
-
-            if(d.getType() == 1)
-            {
-                label.setText("Starter - "+d.getName());
-                label.setFont(Font.font("Verdana", 20));
-               //System.out.println("Starter");
-            }
-            else if(d.getType()==2)
-            {
-                label.setText("Main - "+d.getName());
-                label.setFont(Font.font("Verdana", 20));
-                //System.out.println("Main");
-            }
-            else if(d.getType()==3)
-            {
-                label.setText("Desert - "+d.getName());
-                label.setFont(Font.font("Verdana", 20));
-                //System.out.println("Desert");
-            }
-            text.setText(d.getDescription()+"\n");
-
+            label.setText("Currently no dishes in the menu. Add dishes to the menu to see them here.");
             preparationMenuBox.getChildren().add(label);
-            preparationMenuBox.getChildren().add(text);
+        }
+        else
+        {
+            for(Dish d : dM.getFullMenu())
+            {
 
+                Label label = new Label();
+                Text text = new Text();
 
+                text.maxWidth(400);
+                text.setWrappingWidth(550);
+
+                if(d.getType() == 1)
+                {
+                    label.setText("Starter - "+d.getName());
+                    label.setFont(Font.font("Verdana", 20));
+                   //System.out.println("Starter");
+                }
+                else if(d.getType()==2)
+                {
+                    label.setText("Main - "+d.getName());
+                    label.setFont(Font.font("Verdana", 20));
+                    //System.out.println("Main");
+                }
+                else if(d.getType()==3)
+                {
+                    label.setText("Desert - "+d.getName());
+                    label.setFont(Font.font("Verdana", 20));
+                    //System.out.println("Desert");
+                }
+                text.setText(d.getDescription()+"\n");
+
+                preparationMenuBox.getChildren().add(label);
+                preparationMenuBox.getChildren().add(text);
+            }
         }
     }
 

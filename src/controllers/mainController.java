@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -204,34 +205,41 @@ public class mainController implements Initializable, Observer
     public void updateMenu()
     {
         dinnerMenuBox.getChildren().clear();
-        for(Dish d : dinnerModel.getFullMenu())
+        if(dinnerModel.getFullMenu().isEmpty())
         {
-            Image dishImage;
-            final Text dishLabel;
-            ImageView dishImageView;
-            VBox dishBox = new VBox();
+            Label label = new Label("Drag dishes here to add them.");
+            dinnerMenuBox.getChildren().add(label);
+        }
+        else
+        {
+            for(Dish d : dinnerModel.getFullMenu())
+            {
+                Image dishImage;
+                final Text dishLabel;
+                ImageView dishImageView;
+                VBox dishBox = new VBox();
 
-            Button dishRemove = new Button();
-            dishRemove.setText("x");
+                Button dishRemove = new Button();
+                dishRemove.setText("x");
 
-            dishImage = new Image(new File("images/"+d.getImage()).toURI().toString());
-            dishLabel = new Text(d.getName());
-            dishLabel.setWrappingWidth(140);
-            dishLabel.setTextAlignment(TextAlignment.CENTER);
-            dishImageView = new ImageView(dishImage);
-            dishBox.getChildren().add(dishImageView);
-            dishBox.getChildren().add(dishLabel);
-            dishBox.getChildren().add(dishRemove);
-            dishBox.getStyleClass().add("recipe");
+                dishImage = new Image(new File("images/"+d.getImage()).toURI().toString());
+                dishLabel = new Text(d.getName());
+                dishLabel.setWrappingWidth(140);
+                dishLabel.setTextAlignment(TextAlignment.CENTER);
+                dishImageView = new ImageView(dishImage);
+                dishBox.getChildren().add(dishImageView);
+                dishBox.getChildren().add(dishLabel);
+                dishBox.getChildren().add(dishRemove);
+                dishBox.getStyleClass().add("recipe");
 
-            dishRemove.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    dinnerModel.removeDish(dishLabel.getText());
-                }
-            });
-
-            dinnerMenuBox.getChildren().add(dishBox);
+                dishRemove.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        dinnerModel.removeDish(dishLabel.getText());
+                    }
+                });
+                dinnerMenuBox.getChildren().add(dishBox);
+            }
         }
     }
 
