@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<fx:root maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" styleClass="root" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+
+    <top>
+        <Label prefHeight="20.0" prefWidth="91.0" text="Ingredients" textAlignment="CENTER" BorderPane.alignment="TOP_LEFT">
+            <font>
+                <Font name="Georgia Italic" size="17.0" />
+            </font>
+            <BorderPane.margin>
+                <Insets left="12.0" top="5.0" />
+            </BorderPane.margin>
+        </Label>
+    </top>
+
+<center>
+    <TableView fx:id="itemTbl" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+            <TableColumn maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="Ingredient" fx:id="itemIngredient"/>
+            <TableColumn maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="Quantity" fx:id="itemQuantity"/>
+            <TableColumn maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="Cost" fx:id="itemCost"/>
+        </columns>
+    </TableView>
+</center>
+
+<bottom>
+</bottom>
+
+</fx:root>
