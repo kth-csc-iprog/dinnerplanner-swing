@@ -26,4 +26,15 @@ public interface IDinnerModel {
 	 * Returns the total price of the menu (all the ingredients multiplied by number of guests).
 	 */
 	public float getTotalMenuPrice();
+	
+	/**
+	 * Adds the passed dish to the menu. If the dish of that type already exists on the menu
+	 * it is removed from the menu and the new one added.
+	 */
+	public void addDishToMenu(Dish dish);
+	
+	/**
+	 * Remove dish from menu
+	 */
+	public void removeDishFromMenu(Dish dish);
 }
